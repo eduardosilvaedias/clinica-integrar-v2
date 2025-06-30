@@ -8,7 +8,7 @@ document.getElementById('contact-form').addEventListener('submit', async functio
   const data = Object.fromEntries(formData.entries());
 
   try {
-    const res = await fetch('https://clinica-backend-production-9b7d.up.railway.app', {
+    const res = await fetch('https://clinica-backend-production-9b7d.up.railway.app/contato', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
