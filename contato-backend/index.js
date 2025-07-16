@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 app.post('/contato', async (req, res) => {
-    const { name, phone, email, specialty, message } = req.body;
+    const { name, phone, email, specialty } = req.body;
 
     const transporter = nodemailer.createTransport({
         service: 'gmail', // ou outro serviço SMTP
@@ -29,8 +29,6 @@ Novo contato pelo site:
 📞 Telefone: ${phone}
 📧 E-mail: ${email}
 🎯 Especialidade: ${specialty || "Não informada"}
-💬 Mensagem:
-${message}
         `
     };
 

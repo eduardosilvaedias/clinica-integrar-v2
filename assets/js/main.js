@@ -1,7 +1,7 @@
 // JavaScript Principal - Clínica Integrar V2.0
 
-document.addEventListener('DOMContentLoaded', function() {
-    
+document.addEventListener('DOMContentLoaded', function () {
+
     // Initialize AOS
     AOS.init({
         duration: 800,
@@ -13,14 +13,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Header Scroll Effect
     const header = document.getElementById('header');
     const progressBar = document.getElementById('progress-bar');
-    
+
     window.addEventListener('scroll', () => {
         const scrolled = window.pageYOffset;
         const rate = scrolled / (document.body.scrollHeight - window.innerHeight);
-        
+
         // Update progress bar
         progressBar.style.width = `${rate * 100}%`;
-        
+
         // Header background effect
         if (scrolled > 50) {
             header.classList.add('scrolled');
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mobile Menu Toggle
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
-    
+
     mobileMenuBtn.addEventListener('click', () => {
         mobileMenuBtn.classList.toggle('active');
         mobileMenu.classList.toggle('active');
@@ -52,15 +52,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // Smooth Scrolling for Navigation Links
     const navLinks = document.querySelectorAll('a[href^="#"]');
     navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
+        link.addEventListener('click', function (e) {
             e.preventDefault();
             const targetId = this.getAttribute('href');
             const targetSection = document.querySelector(targetId);
-            
+
             if (targetSection) {
                 const headerHeight = header.offsetHeight;
                 const targetPosition = targetSection.offsetTop - headerHeight;
-                
+
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Active Navigation Link
     const sections = document.querySelectorAll('section[id]');
     const navLinksAll = document.querySelectorAll('.nav-link');
-    
+
     window.addEventListener('scroll', () => {
         let current = '';
         sections.forEach(section => {
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const target = parseInt(counter.getAttribute('data-target'));
             const count = parseInt(counter.innerText);
             const increment = target / 100;
-            
+
             if (count < target) {
                 counter.innerText = Math.ceil(count + increment);
                 setTimeout(() => animateCounters(), 20);
@@ -124,55 +124,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Parallax Effect for Floating Elements
     const floatingElements = document.querySelectorAll('.floating-element');
-    
+
     window.addEventListener('scroll', () => {
         const scrolled = window.pageYOffset;
         const rate = scrolled * -0.5;
-        
+
         floatingElements.forEach((element, index) => {
             const speed = (index + 1) * 0.1;
             element.style.transform = `translateY(${rate * speed}px)`;
         });
     });
 
-    // Form Validation and Submission
-    const contactForm = document.getElementById('contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
-            
-            // Basic validation
-            if (!data.name || !data.email || !data.message) {
-                showNotification('Por favor, preencha todos os campos obrigatórios.', 'error');
-                return;
-            }
-            
-            if (!isValidEmail(data.email)) {
-                showNotification('Por favor, insira um email válido.', 'error');
-                return;
-            }
-            
-            // Simulate form submission
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
-            
-            submitBtn.innerHTML = '<span class="loading-spinner"></span> Enviando...';
-            submitBtn.disabled = true;
-            
-            setTimeout(() => {
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-                this.reset();
-                showNotification('Mensagem enviada com sucesso! Entraremos em contato em breve.', 'success');
-            }, 2000);
-        });
-    }
-
-    // Email Validation
+    // Email Validation (mantido para uso futuro)
     function isValidEmail(email) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
@@ -188,14 +151,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 <button class="notification-close">&times;</button>
             </div>
         `;
-        
+
         document.body.appendChild(notification);
-        
+
         // Auto remove after 5 seconds
         setTimeout(() => {
             notification.remove();
         }, 5000);
-        
+
         // Manual close
         notification.querySelector('.notification-close').addEventListener('click', () => {
             notification.remove();
@@ -220,11 +183,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Specialty Cards Interaction
     const specialtyCards = document.querySelectorAll('.specialty-card');
     specialtyCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
+        card.addEventListener('mouseenter', function () {
             this.style.transform = 'translateY(-12px) scale(1.02)';
         });
-        
-        card.addEventListener('mouseleave', function() {
+
+        card.addEventListener('mouseleave', function () {
             this.style.transform = 'translateY(0) scale(1)';
         });
     });
@@ -232,10 +195,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Team Cards Interaction
     const teamCards = document.querySelectorAll('.team-card');
     teamCards.forEach(card => {
-        card.addEventListener('click', function() {
+        card.addEventListener('click', function () {
             const modal = document.getElementById('team-modal');
             const memberData = JSON.parse(this.dataset.member);
-            
+
             if (modal && memberData) {
                 populateTeamModal(memberData);
                 modal.classList.add('active');
@@ -258,14 +221,14 @@ document.addEventListener('DOMContentLoaded', function() {
     modals.forEach(modal => {
         const closeBtn = modal.querySelector('.modal-close');
         const overlay = modal.querySelector('.modal-overlay');
-        
+
         if (closeBtn) {
             closeBtn.addEventListener('click', () => {
                 modal.classList.remove('active');
                 document.body.style.overflow = '';
             });
         }
-        
+
         if (overlay) {
             overlay.addEventListener('click', () => {
                 modal.classList.remove('active');
@@ -280,33 +243,33 @@ document.addEventListener('DOMContentLoaded', function() {
         let currentSlide = 0;
         const slides = testimonialCarousel.querySelectorAll('.testimonial-slide');
         const totalSlides = slides.length;
-        
+
         function showSlide(index) {
             slides.forEach((slide, i) => {
                 slide.style.transform = `translateX(${(i - index) * 100}%)`;
             });
         }
-        
+
         function nextSlide() {
             currentSlide = (currentSlide + 1) % totalSlides;
             showSlide(currentSlide);
         }
-        
+
         function prevSlide() {
             currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
             showSlide(currentSlide);
         }
-        
+
         // Auto-play carousel
         setInterval(nextSlide, 5000);
-        
+
         // Navigation buttons
         const nextBtn = document.querySelector('.carousel-next');
         const prevBtn = document.querySelector('.carousel-prev');
-        
+
         if (nextBtn) nextBtn.addEventListener('click', nextSlide);
         if (prevBtn) prevBtn.addEventListener('click', prevSlide);
-        
+
         // Initialize carousel
         showSlide(0);
     }
@@ -324,7 +287,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.appendChild(whatsappBtn);
 
     // Keyboard Navigation
-    document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', function (e) {
         // ESC key to close modals
         if (e.key === 'Escape') {
             const activeModal = document.querySelector('.modal.active');
@@ -332,7 +295,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 activeModal.classList.remove('active');
                 document.body.style.overflow = '';
             }
-            
+
             // Close mobile menu
             if (mobileMenu.classList.contains('active')) {
                 mobileMenuBtn.classList.remove('active');
@@ -364,7 +327,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Error Handling
-    window.addEventListener('error', function(e) {
+    window.addEventListener('error', function (e) {
         console.error('JavaScript error:', e.error);
         // You could send this to an error tracking service
     });
@@ -379,7 +342,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Utility Functions
 const Utils = {
     // Debounce function
-    debounce: function(func, wait, immediate) {
+    debounce: function (func, wait, immediate) {
         let timeout;
         return function executedFunction(...args) {
             const later = () => {
@@ -394,9 +357,9 @@ const Utils = {
     },
 
     // Throttle function
-    throttle: function(func, limit) {
+    throttle: function (func, limit) {
         let inThrottle;
-        return function() {
+        return function () {
             const args = arguments;
             const context = this;
             if (!inThrottle) {
@@ -408,7 +371,7 @@ const Utils = {
     },
 
     // Format phone number
-    formatPhone: function(phone) {
+    formatPhone: function (phone) {
         const cleaned = phone.replace(/\D/g, '');
         const match = cleaned.match(/^(\d{2})(\d{5})(\d{4})$/);
         if (match) {
@@ -418,11 +381,11 @@ const Utils = {
     },
 
     // Animate element
-    animate: function(element, animation, duration = 1000) {
+    animate: function (element, animation, duration = 1000) {
         return new Promise((resolve) => {
             element.style.animationDuration = `${duration}ms`;
             element.classList.add(animation);
-            
+
             element.addEventListener('animationend', () => {
                 element.classList.remove(animation);
                 resolve();
@@ -444,10 +407,10 @@ class TeamModal {
         this.modalContent = this.modal.querySelector('.modal-content');
         this.closeButtons = this.modal.querySelectorAll('.modal-close, .modal-close-cta, .modal-overlay');
         this.teamCards = document.querySelectorAll('.team-card');
-        
+
         this.init();
     }
-    
+
     init() {
         // Add click listeners to team cards
         this.teamCards.forEach(card => {
@@ -456,14 +419,14 @@ class TeamModal {
                 this.openModal(memberData);
             });
         });
-        
+
         // Add close listeners
         this.closeButtons.forEach(button => {
             button.addEventListener('click', () => {
                 this.closeModal();
             });
         });
-        
+
         // Close on escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && this.modal.classList.contains('active')) {
@@ -471,27 +434,27 @@ class TeamModal {
             }
         });
     }
-    
+
     openModal(memberData) {
         // Populate modal with member data
         this.populateModal(memberData);
-        
+
         // Show modal
         this.modal.classList.add('active');
         document.body.style.overflow = 'hidden';
-        
+
         // Add entrance animation
         setTimeout(() => {
             this.modalContent.style.transform = 'scale(1)';
         }, 10);
     }
-    
+
     closeModal() {
         this.modal.classList.remove('active');
         document.body.style.overflow = '';
         this.modalContent.style.transform = 'scale(0.95)';
     }
-    
+
     populateModal(data) {
         // Update modal content
         this.modal.querySelector('.modal-name').textContent = data.name;
@@ -500,18 +463,18 @@ class TeamModal {
         this.modal.querySelector('.modal-experience').textContent = data.experience;
         this.modal.querySelector('.modal-education').textContent = data.education;
         this.modal.querySelector('.modal-image').textContent = data.image;
-        
+
         // Update specialties
         const specialtiesContainer = this.modal.querySelector('.modal-specialties');
         specialtiesContainer.innerHTML = '';
-        
+
         data.specialties.forEach(specialty => {
             const tag = document.createElement('div');
             tag.className = 'specialty-tag';
             tag.textContent = specialty;
             specialtiesContainer.appendChild(tag);
         });
-        
+
         // Update header gradient based on role
         const header = this.modal.querySelector('.h-48');
         const roleColors = {
@@ -522,7 +485,7 @@ class TeamModal {
             'Terapeuta Ocupacional': 'from-orange-100 to-red-100',
             'Nutricionista': 'from-teal-100 to-cyan-100'
         };
-        
+
         // Reset classes
         header.className = 'h-48 bg-gradient-to-br flex items-center justify-center rounded-t-3xl';
         header.classList.add(roleColors[data.role] || 'from-primary-100 to-secondary-100');
@@ -535,47 +498,47 @@ class TestimonialsCarousel {
         this.testimonials = document.querySelectorAll('.testimonial-card');
         this.currentIndex = 0;
         this.autoPlayInterval = null;
-        
+
         this.init();
     }
-    
+
     init() {
         if (this.testimonials.length === 0) return;
-        
+
         // Add hover pause functionality
         this.testimonials.forEach(card => {
             card.addEventListener('mouseenter', () => {
                 this.pauseAutoPlay();
             });
-            
+
             card.addEventListener('mouseleave', () => {
                 this.startAutoPlay();
             });
         });
-        
+
         this.startAutoPlay();
     }
-    
+
     startAutoPlay() {
         this.autoPlayInterval = setInterval(() => {
             this.highlightNext();
         }, 5000);
     }
-    
+
     pauseAutoPlay() {
         if (this.autoPlayInterval) {
             clearInterval(this.autoPlayInterval);
         }
     }
-    
+
     highlightNext() {
         // Remove highlight from current
         this.testimonials[this.currentIndex].style.transform = 'scale(1)';
         this.testimonials[this.currentIndex].style.boxShadow = '';
-        
+
         // Move to next
         this.currentIndex = (this.currentIndex + 1) % this.testimonials.length;
-        
+
         // Highlight new current
         this.testimonials[this.currentIndex].style.transform = 'scale(1.05)';
         this.testimonials[this.currentIndex].style.boxShadow = '0 20px 40px rgba(0,0,0,0.1)';
@@ -588,13 +551,13 @@ class StatisticsCounter {
     constructor() {
         this.counters = document.querySelectorAll('.counter');
         this.hasAnimated = false;
-        
+
         this.init();
     }
-    
+
     init() {
         if (this.counters.length === 0) return;
-        
+
         // Create intersection observer
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -604,20 +567,20 @@ class StatisticsCounter {
                 }
             });
         }, { threshold: 0.5 });
-        
+
         // Observe the first counter
         if (this.counters[0]) {
             observer.observe(this.counters[0]);
         }
     }
-    
+
     animateCounters() {
         this.counters.forEach(counter => {
             const target = parseInt(counter.dataset.target);
             const duration = 2000; // 2 seconds
             const increment = target / (duration / 16); // 60fps
             let current = 0;
-            
+
             const updateCounter = () => {
                 current += increment;
                 if (current < target) {
@@ -627,29 +590,29 @@ class StatisticsCounter {
                     counter.textContent = target;
                 }
             };
-            
+
             updateCounter();
         });
     }
 }
 
 // Initialize all enhanced features
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Initialize existing features
     initializeApp();
-    
+
     // Initialize new features
     new TeamModal();
     new TestimonialsCarousel();
     new StatisticsCounter();
-    
+
     // Enhanced smooth scrolling for team modal CTA
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', function (e) {
         if (e.target.closest('.modal-close-cta')) {
             setTimeout(() => {
                 const contactSection = document.getElementById('contato');
                 if (contactSection) {
-                    contactSection.scrollIntoView({ 
+                    contactSection.scrollIntoView({
                         behavior: 'smooth',
                         block: 'start'
                     });
@@ -657,16 +620,16 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 300);
         }
     });
-    
+
     // Add testimonial card hover effects
     const testimonialCards = document.querySelectorAll('.testimonial-card');
     testimonialCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
+        card.addEventListener('mouseenter', function () {
             this.style.transform = 'translateY(-10px) scale(1.02)';
             this.style.boxShadow = '0 20px 40px rgba(0,0,0,0.15)';
         });
-        
-        card.addEventListener('mouseleave', function() {
+
+        card.addEventListener('mouseleave', function () {
             this.style.transform = 'translateY(0) scale(1)';
             this.style.boxShadow = '';
         });
