@@ -269,17 +269,18 @@
                         </h1>
 
                         <p
-                            class="text-xs sm:text-sm lg:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                            class="text-xs sm:text-sm lg:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto lg:mx-0 break-words">
                             Oferecemos tratamento especializado em reabilitação e desenvolvimento infantil com
                             <span class="font-semibold text-primary-600">método transdisciplinar</span>,
-                            <span class="font-semibold text-secondary-600">terapia ABA</span> e
+                            <span class="font-semibold text-secondary-600">terapia ABA</span>
+                            <br class="block sm:hidden" />
                             <span class="font-semibold text-accent-600">resultados comprovados</span>.
                         </p>
                     </div>
 
                     <!-- CTAs -->
                     <div
-                        class="flex flex-col sm:flex-row gap-4 w-full max-w-xs mx-auto justify-center lg:justify-start">
+                        class="flex flex-col sm:flex-row gap-4 w-full max-w-xs sm:max-w-none sm:w-auto mx-auto sm:mx-0 justify-center lg:justify-start">
                         <a href="#contato" class="btn-primary group w-full sm:w-auto box-border">
                             <span>Agende uma Avaliação</span>
                             <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none"
@@ -311,8 +312,11 @@
                             <p class="text-sm text-gray-600 mt-1">Especialidades</p>
                         </div>
                         <div class="text-center" data-aos="fade-up" data-aos-delay="300">
-                            <div class="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-accent-600 to-success-600 bg-clip-text text-transparent counter"
-                                data-target="95">0</div>
+                            <div
+                                class="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4 break-words">
+                                <span class="text-xl sm:text-2xl md:text-3xl text-white font-bold counter"
+                                    data-target="95">95%</span>
+                            </div>
                             <p class="text-sm text-gray-600 mt-1">% Satisfação</p>
                         </div>
                     </div>
